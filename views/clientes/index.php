@@ -18,12 +18,6 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <label for="cli_direccion">Dirección</label>
-                    <input type="text" name="cli_direccion" id="cli_direccion" class="form-control" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
                     <label for="cli_telefono">Teléfono</label>
                     <input type="text" name="cli_telefono" id="cli_telefono" class="form-control" required>
                 </div>
@@ -62,7 +56,6 @@
                         <th>No.</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
-                        <th>Dirección</th>
                         <th>Teléfono</th>
                         <th>Email</th>
                         <th>Modificar</th>

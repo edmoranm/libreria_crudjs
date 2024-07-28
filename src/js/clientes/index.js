@@ -12,12 +12,11 @@ btnCancelar.parentElement.style.display = 'none';
 const getClientes = async (alerta = 'si') => {
     const nombre = formulario.cli_nombre.value.trim();
     const apellido = formulario.cli_apellido.value.trim();
-    const direccion = formulario.cli_direccion.value.trim();
     const telefono = formulario.cli_telefono.value.trim();
     const email = formulario.cli_email.value.trim();
-    console.log(nombre, apellido, direccion, telefono, email);
+    console.log(nombre, apellido, telefono, email);
     
-    const url = `/libreria_crudjs/controladores/clientes/index.php?cli_nombre=${nombre}&cli_apellido=${apellido}&cli_direccion=${direccion}&cli_telefono=${telefono}&cli_email=${email}`;
+    const url = `/libreria_crudjs/controladores/clientes/index.php?cli_nombre=${nombre}&cli_apellido=${apellido}&cli_telefono=${telefono}&cli_email=${email}`;
     const config = {
         method: 'GET'
     };
@@ -31,7 +30,7 @@ const getClientes = async (alerta = 'si') => {
         const fragment = document.createDocumentFragment();
         let contador = 1;
 
-        if (respuesta.ok) {
+        if (respuesta.status === 200) {
             if(alerta === 'si'){
                 Swal.mixin({
                     toast: true,
@@ -58,16 +57,14 @@ const getClientes = async (alerta = 'si') => {
                     const celda5 = document.createElement('td');
                     const celda6 = document.createElement('td');
                     const celda7 = document.createElement('td');
-                    const celda8 = document.createElement('td');
                     const buttonModificar = document.createElement('button');
                     const buttonEliminar = document.createElement('button');
 
                     celda1.innerText = contador;
                     celda2.innerText = cliente.cli_nombre;
                     celda3.innerText = cliente.cli_apellido;
-                    celda4.innerText = cliente.cli_direccion;
-                    celda5.innerText = cliente.cli_telefono;
-                    celda6.innerText = cliente.cli_email;
+                    celda4.innerText = cliente.cli_telefono;
+                    celda5.innerText = cliente.cli_email;
 
                     buttonModificar.textContent = 'Modificar';
                     buttonModificar.classList.add('btn', 'btn-warning', 'w-100');
@@ -75,7 +72,6 @@ const getClientes = async (alerta = 'si') => {
                         formulario.cli_id.value = cliente.cli_id;
                         formulario.cli_nombre.value = cliente.cli_nombre;
                         formulario.cli_apellido.value = cliente.cli_apellido;
-                        formulario.cli_direccion.value = cliente.cli_direccion;
                         formulario.cli_telefono.value = cliente.cli_telefono;
                         formulario.cli_email.value = cliente.cli_email;
 
@@ -108,7 +104,7 @@ const getClientes = async (alerta = 'si') => {
                                 const respuestaEliminar = await fetch(eliminarUrl, config);
                                 const dataEliminar = await respuestaEliminar.json();
 
-                                if (respuestaEliminar.ok) {
+                                if (respuestaEliminar.status === 200) {
                                     Swal.fire('Eliminado!', 'El cliente ha sido eliminado.', 'success');
                                     getClientes();
                                 } else {
@@ -116,13 +112,12 @@ const getClientes = async (alerta = 'si') => {
                                 }
                             } catch (error) {
                                 console.error('Error en la eliminación:', error);
-                                Swal.fire('Error', 'Se produjo un error al eliminar el cliente.', 'error');
                             }
                         }
                     };
 
-                    celda7.appendChild(buttonModificar);
-                    celda8.appendChild(buttonEliminar);
+                    celda6.appendChild(buttonModificar);
+                    celda7.appendChild(buttonEliminar);
                     tr.appendChild(celda1);
                     tr.appendChild(celda2);
                     tr.appendChild(celda3);
@@ -130,7 +125,6 @@ const getClientes = async (alerta = 'si') => {
                     tr.appendChild(celda5);
                     tr.appendChild(celda6);
                     tr.appendChild(celda7);
-                    tr.appendChild(celda8);
                     fragment.appendChild(tr);
                     contador++;
                 });
@@ -138,7 +132,7 @@ const getClientes = async (alerta = 'si') => {
             } else {
                 const tr = document.createElement('tr');
                 const td = document.createElement('td');
-                td.colSpan = 8;
+                td.colSpan = 7;
                 td.classList.add('text-center');
                 td.innerText = 'No hay clientes registrados';
                 tr.appendChild(td);
@@ -149,7 +143,6 @@ const getClientes = async (alerta = 'si') => {
         }
     } catch (error) {
         console.error('Error en la búsqueda:', error);
-        Swal.fire('Error', 'Se produjo un error en la búsqueda de clientes.', 'error');
     }
 };
 
@@ -171,7 +164,7 @@ btnGuardar.addEventListener('click', async (e) => {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
 
-        if (respuesta.ok) {
+        if (respuesta.status === 200) {
             Swal.fire('Guardado!', 'El cliente ha sido guardado.', 'success');
             formulario.reset();
             getClientes();
@@ -180,7 +173,6 @@ btnGuardar.addEventListener('click', async (e) => {
         }
     } catch (error) {
         console.error('Error en el guardado:', error);
-        Swal.fire('Error', 'Se produjo un error al guardar el cliente.', 'error');
     }
 });
 
@@ -197,7 +189,7 @@ btnModificar.addEventListener('click', async (e) => {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
 
-        if (respuesta.ok) {
+        if (respuesta.status === 200) {
             Swal.fire('Modificado!', 'El cliente ha sido modificado.', 'success');
             formulario.reset();
             btnModificar.parentElement.style.display = 'none';
@@ -210,7 +202,6 @@ btnModificar.addEventListener('click', async (e) => {
         }
     } catch (error) {
         console.error('Error en la modificación:', error);
-        Swal.fire('Error', 'Se produjo un error al modificar el cliente.', 'error');
     }
 });
 
