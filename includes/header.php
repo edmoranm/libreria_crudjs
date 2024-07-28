@@ -10,7 +10,7 @@
     <title>App de Libreria - CRUDJS</title>
 </head>
 
-<style>
+<!-- <style>
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #1a237e 0%, #3f51b5 100%);
@@ -21,10 +21,10 @@ body {
 }
 
 .title-custom {
-    color: #ffffff; /* Cambia el color del texto a blanco */
+    color: #ffffff; Cambia el color del texto a blanco
 }
 
-</style>
+</style> -->
 
 <body>
 
