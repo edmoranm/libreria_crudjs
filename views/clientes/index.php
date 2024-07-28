@@ -12,6 +12,12 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
+                    <label for="cli_apellido">Apellido del Cliente</label>
+                    <input type="text" name="cli_apellido" id="cli_apellido" class="form-control" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
                     <label for="cli_direccion">Dirección</label>
                     <input type="text" name="cli_direccion" id="cli_direccion" class="form-control" required>
                 </div>
@@ -20,6 +26,12 @@
                 <div class="col">
                     <label for="cli_telefono">Teléfono</label>
                     <input type="text" name="cli_telefono" id="cli_telefono" class="form-control" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="cli_email">Correo Electronico</label>
+                    <input type="text" name="cli_email" id="cli_email" class="form-control" required>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
@@ -49,15 +61,17 @@
                     <tr class="title-custom">
                         <th>No.</th>
                         <th>Nombre</th>
+                        <th>Apellido</th>
                         <th>Dirección</th>
                         <th>Teléfono</th>
+                        <th>Email</th>
                         <th>Modificar</th>
                         <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="6">No hay clientes disponibles</td>
+                        <td colspan="8">No hay clientes disponibles</td>
                     </tr>
                 </tbody>
             </table>

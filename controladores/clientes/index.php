@@ -3,27 +3,27 @@ require '../../models/clientes.php';
 header('Content-Type: application/json; charset=UTF-8');
 
 $metodo = $_SERVER['REQUEST_METHOD'];
-$tipo = $_REQUEST['tipo'];
+$tipo = isset($_REQUEST['tipo']) ? intval($_REQUEST['tipo']) : 0;
 
 try {
     switch ($metodo) {
         case 'POST':
             $cliente = new Cliente($_POST);
             switch ($tipo) {
-                case '1':
+                case 1:
                     $ejecucion = $cliente->guardar();
                     $mensaje = "Cliente guardado correctamente";
                     break;
-                case '2':
+                case 2:
                     $ejecucion = $cliente->modificar();
                     $mensaje = "Cliente modificado correctamente";
                     break;
-                case '3':
+                case 3:
                     $ejecucion = $cliente->eliminar();
                     $mensaje = "Cliente eliminado correctamente";
                     break;
                 default:
-                    break;
+                    throw new Exception("Tipo de operación no válido.");
             }
             http_response_code(200);
             echo json_encode([
@@ -33,9 +33,9 @@ try {
             break;
 
         case 'GET':
-            http_response_code(200);
             $cliente = new Cliente($_GET);
             $clientes = $cliente->buscar();
+            http_response_code(200);
             echo json_encode($clientes);
             break;
 
